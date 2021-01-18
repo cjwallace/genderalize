@@ -3,18 +3,13 @@ import sys
 
 import en_core_web_sm
 
-from genderalize import GenderMatcher, gender_generalization_matcher
+from genderalize import GenderMatcher, gender_generalization_matcher, gendered_dict
 
 
 def main(sentence):
-    with open("genderalize/words.json", "r") as f:
-        raw_json = f.read()
-
-    gendered_words = json.loads(raw_json)
-
     nlp = en_core_web_sm.load()
 
-    gender_component = GenderMatcher(nlp, gendered_words)
+    gender_component = GenderMatcher(nlp, gendered_dict)
     nlp.add_pipe(gender_component)
     nlp.add_pipe(gender_generalization_matcher)
 
