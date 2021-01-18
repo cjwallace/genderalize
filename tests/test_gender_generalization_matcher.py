@@ -123,6 +123,7 @@ def test_gender_generalization_matcher_tags_positive_cases(nlp):
     docs = list(
         nlp.pipe(
             [
+                "She's got a wonderful feeling.",
                 "The programmer put down his laptop.",
                 "The pilot cursed her luck.",
                 "It's not often one forgets to tie his shoelaces.",
