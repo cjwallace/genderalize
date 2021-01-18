@@ -26,7 +26,6 @@ Within that environment, run:
 
 ```bash
 pip install -r requirements.txt
-pip install -e .
 ```
 
 #### Conventions
