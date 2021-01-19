@@ -1,12 +1,11 @@
 import pytest
-import spacy
 import en_core_web_sm
 from spacy.tokens import Doc
 
 from genderalize import GenderMatcher, gender_generalization_matcher, gendered_dict
 
 
-@pytest.fixture()
+@pytest.fixture(scope="module")
 def nlp():
     nlp = en_core_web_sm.load()
     matcher = GenderMatcher(nlp, gendered_dict)

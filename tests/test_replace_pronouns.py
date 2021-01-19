@@ -1,7 +1,5 @@
 import pytest
-import spacy
 import en_core_web_sm
-from spacy.tokens import Doc
 
 from genderalize import (
     GenderMatcher,
@@ -11,21 +9,13 @@ from genderalize import (
 )
 
 
-@pytest.fixture()
+@pytest.fixture(scope="module")
 def nlp():
     nlp = en_core_web_sm.load()
     matcher = GenderMatcher(nlp, gendered_dict)
     nlp.add_pipe(matcher)
     nlp.add_pipe(gender_generalization_matcher)
     return nlp
-
-
-def test_replace_prononouns_raises_if_no_gender_annotations():
-    nlp = en_core_web_sm.load()
-    doc = nlp("He she it they.")
-    with pytest.raises(ValueError) as err:
-        replace_pronouns(nlp, doc, "m")
-    assert "GenderMatcher" in str(err)
 
 
 def test_replace_pronouns_leaves_empty_string_unchanged(nlp):

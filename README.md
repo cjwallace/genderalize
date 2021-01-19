@@ -21,14 +21,12 @@ python cli.py "One sentence" "Another sentence" "And so on"
 
 ### Setup
 
-Clone this repository, and start a python3 virtual environment by your preferred means.
-Within that environment, run:
+This repository is intended to be used via [Poetry](https://python-poetry.org/).
+To install, clone the repository, and run `poetry install` inside it (this may require you to first [install Poetry](https://python-poetry.org/docs/#installation)).
 
-```bash
-pip install -r requirements.txt
-```
+A `requirements.txt` file is provided, which should enable installation in other python 3 environments.
 
-#### Conventions
+### Conventions
 
 The repo uses [black](https://github.com/psf/black) for code fomatting, [pytest](https://docs.pytest.org/en/stable/) for testing and [pylint](http://pylint.pycqa.org/en/latest/) for linting.
 
