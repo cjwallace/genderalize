@@ -5,10 +5,14 @@ description = "A utility for detecting and changing gender generalizations in te
 authors = ["Chris Wallace <chris@bitcollider.io>"]
 license = "MIT"
 
+[tool.poetry.scripts]
+genderalize = "genderalize.cli:app"
+
 [tool.poetry.dependencies]
 python = "^3.8"
 spacy = "^2.3.5"
 en_core_web_sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz#egg=en_core_web_sm" }
+typer = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
