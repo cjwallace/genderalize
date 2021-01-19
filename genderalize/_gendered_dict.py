@@ -1,6 +1,5 @@
 import json
+import importlib.resources
 
-with open("genderalize/words.json", "r") as f:
-    raw_json = f.read()
-
-gendered_dict = json.loads(raw_json)
+with importlib.resources.open_text("genderalize", "words.json") as f:
+    gendered_dict = json.load(f)
