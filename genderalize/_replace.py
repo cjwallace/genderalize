@@ -71,21 +71,32 @@ def should_replace_pronoun(token, target_gender):
     )
 
 
+def replace_pronoun_at_start_of_doc(nlp, doc, token, pronoun):
+    return nlp.make_doc(f"{pronoun}" + doc[token.i + 1 :].text_with_ws)
+
+
+def replace_pronoun_in_middle_of_doc(nlp, doc, token, pronoun):
+    return nlp.make_doc(
+        doc[: token.i].text_with_ws + f"{pronoun}" + doc[token.i + 1 :].text_with_ws
+    )
+
+
 def replace_pronouns(nlp, doc, target_gender):
     """
     Replace the pronouns in a sentence with pronouns of target_gender,
     if they are different to target_gender.
     """
+    if not all([token.get_extension("gender") for token in doc]):
+        raise ValueError(
+            "The document must have been tagged by the GenderMatcher class."
+        )
+
     for token in doc:
         if should_replace_pronoun(token, target_gender):
             new_pronoun = create_new_pronoun(token)
 
             if token.i == 0:
-                doc = nlp.make_doc(f"{new_pronoun}" + doc[token.i + 1 :].text_with_ws)
+                doc = replace_pronoun_at_start_of_doc(nlp, doc, token, new_pronoun)
             else:
-                doc = nlp.make_doc(
-                    doc[: token.i].text_with_ws
-                    + f"{new_pronoun}"
-                    + doc[token.i + 1 :].text_with_ws
-                )
+                doc = replace_pronoun_in_middle_of_doc(nlp, doc, token, new_pronoun)
     return doc

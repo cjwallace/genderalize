@@ -20,6 +20,20 @@ def nlp():
     return nlp
 
 
+def test_replace_prononouns_raises_if_no_gender_annotations():
+    nlp = en_core_web_sm.load()
+    doc = nlp("He she it they.")
+    with pytest.raises(ValueError) as err:
+        replace_pronouns(nlp, doc, "m")
+    assert "GenderMatcher" in str(err)
+
+
+def test_replace_pronouns_leaves_empty_string_unchanged(nlp):
+    doc = nlp("")
+    replaced = replace_pronouns(nlp, doc, "f")
+    assert replaced.text == doc.text
+
+
 def test_replace_pronouns_single_she_to_he(nlp):
     doc = nlp("Is she an astronaut?")
     replaced = replace_pronouns(nlp, doc, "m")
@@ -57,16 +71,16 @@ def test_replace_pronouns_respects_target_gender(nlp):
     assert replaced.text == "She for she."
 
 
-def test_replace_pronouns_personal_pronouns(nlp):
-    doc = nlp("It was her apple.")
-    replaced = replace_pronouns(nlp, doc, "m")
-    assert replaced.text == "It was his apple."
+def test_replace_pronouns_possessive_determiner_pronouns(nlp):
+    doc = nlp("It was his apple.")
+    replaced = replace_pronouns(nlp, doc, "f")
+    assert replaced.text == "It was her apple."
 
 
-def test_replace_prononouns_possessive_pronuns(nlp):
-    doc = nlp("It was so her.")
-    replaced = replace_pronouns(nlp, doc, "m")
-    assert replaced.text == "It was so him."
+def test_replace_prononouns_possessive_personal_pronouns(nlp):
+    doc = nlp("The apple was his.")
+    replaced = replace_pronouns(nlp, doc, "f")
+    assert replaced.text == "The apple was hers."
 
 
 def test_replace_pronouns_personal_and_possessive_pronouns(nlp):
