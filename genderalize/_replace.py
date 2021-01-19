@@ -86,10 +86,6 @@ def replace_pronouns(nlp, doc, target_gender):
     Replace the pronouns in a sentence with pronouns of target_gender,
     if they are different to target_gender.
     """
-    if not all([token.get_extension("gender") for token in doc]):
-        raise ValueError(
-            "The document must have been tagged by the GenderMatcher class."
-        )
 
     for token in doc:
         if should_replace_pronoun(token, target_gender):
