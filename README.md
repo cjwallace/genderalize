@@ -98,6 +98,7 @@ This repository is intended to be installed via [Poetry](https://python-poetry.o
 To install, clone the repository, and run `poetry install` inside it (this may require you to first [install Poetry](https://python-poetry.org/docs/#installation)).
 
 A `requirements.txt` file is provided, which should enable installation in other python 3 environments.
+Some additional packaging work would be required to install the CLI if not installed through poetry.
 
 ## Conventions
 
