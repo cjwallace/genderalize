@@ -19,6 +19,22 @@ A sentence is identified as a gender generalization if it:
 
 This is conservative in the sense that it will not detect all gender generalizations but is unlikely to classify something as a generalization that is not one.
 
+### Contents
+
+- [Usage](#usage)
+  - [CLI](#cli)
+  - [API](#api)
+  - [Library](#library)
+- [Installation](#installation)
+- [Conventions](#conventions)
+- [Data](#data)
+- [Known limitations](#known-limitations)
+  - [Non-binary gender](#non-binary-gender)
+  - [Entity resolution](#entity-resolution)
+  - [Lemmatization](#lemmatization)
+  - [Long contexts](#long-contexts)
+  - [Statistical errors](#statistical-errors)
+
 ## Usage
 
 ### CLI
@@ -101,7 +117,7 @@ Aside from detecting only gender generalizations and not other forms of gender b
 
 ### Non-binary gender
 
-Gender is non-binary. Pronoun replacement works only for male (he/him) and female (she/her) gendered pronouns. Truly neutralizing sentences with singular they/them pronouns presents a harder technical challenge, but would be worthy work.
+Gender is non-binary. The currently-implemented pronoun replacement works only for male (he/him) and female (she/her) gendered pronouns. Truly neutralizing sentences with singular they/them pronouns presents a harder technical challenge, but would be worthy work.
 
 ### Entity resolution
 
