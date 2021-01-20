@@ -7,7 +7,7 @@ This utility detects gender generalizations of the form
 
 > The astronaut drank his coffee.
 
-where a gender-specific pronoun ("his") was used with a gender neutral term. It also presents functions to replace gendered pronouns, turning the above text into
+where a gender-specific pronoun ("his") was used with a gender neutral noun (astronaut). It also presents functions to replace gendered pronouns, turning the above text into
 
 > The astronaut drank her coffee.
 
@@ -54,6 +54,24 @@ Further instructions for the CLI can be obtained with the CLI itself:
 genderalize --help
 ```
 
+### API
+
+A small REST API is also provided using [FastAPI](https://fastapi.tiangolo.com/).
+The API can be served with
+
+```
+uvicorn genderalize.api:app --reload
+```
+
+This exposes three endpoints on `localhost:8000` (by default).
+The endpoints are:
+
+- `/status` - this always returns green, and should be used only to test that the endpoint is accessible.
+- `/biases` - this expects some input text and returns a response of the form `{generalization: True}` if the text is a gender generalization.
+- `/biases/generalizations/{m,f}` - expects input text, and converts the pronoun to the specified m/f gender if the text is a gender generalization.
+
+Specific request and response forms can be viewed in the auto-generated documentation at `localhost:8000/docs`.
+
 ### Library
 
 The CLI is built using the included `genderalize` library. It is composed of custom [spaCy](https://spacy.io/) (v2) pipeline components for identifying gender generalizations, and some functions for replacing gendered pronouns.
@@ -67,7 +85,11 @@ A `requirements.txt` file is provided, which should enable installation in other
 
 ## Conventions
 
-The repo uses [black](https://github.com/psf/black) for code fomatting, [pytest](https://docs.pytest.org/en/stable/) for testing and [pylint](http://pylint.pycqa.org/en/latest/) for linting.
+The repo uses default configurations of
+
+- [black](https://github.com/psf/black) for code formatting,
+- [pytest](https://docs.pytest.org/en/stable/) for testing, and
+- [pylint](http://pylint.pycqa.org/en/latest/) for linting.
 
 ## Data
 
